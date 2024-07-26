@@ -14,7 +14,7 @@ public sealed class EntryView : UIView
     public EntryView(string caption, string value = "", bool isPassword = false)
     {
         this.caption = new UILabel()
-            { Font = UIFont.SystemFontOfSize(15, UIFontWeight.Semibold), TextColor = UIColor.Gray };
+        { Font = UIFont.SystemFontOfSize(15, UIFontWeight.Semibold), TextColor = UIColor.Gray };
         this.caption.Text = caption;
         this.textField = new UITextField();
         this.textField.BorderStyle = UITextBorderStyle.RoundedRect;

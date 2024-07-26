@@ -1,3 +1,7 @@
+// <copyright file="StringElement.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 namespace DA.UI.TableView.Elements;
 
 public class StringElement : BaseElement<string>

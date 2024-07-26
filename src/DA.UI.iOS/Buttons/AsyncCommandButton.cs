@@ -1,3 +1,7 @@
+// <copyright file="AsyncCommandButton.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 using System.ComponentModel;
 using DA.UI.Commands;
 

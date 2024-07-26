@@ -39,7 +39,13 @@ public sealed class EntryElement : BaseElement<string>
     public bool IsEnabled
     {
         get => this.holderView.TextField.Enabled;
-        set => this.holderView.TextField.Enabled = value;
+        set
+        {
+            this.InvokeOnMainThread(() =>
+            {
+                this.holderView.TextField.Enabled = value;
+            });
+        }
     }
 
     public override void Layout()

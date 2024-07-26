@@ -14,7 +14,7 @@ public class Section : IEnumerable<Element>, IEnumerable
     private List<Element> elements;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="UITableViewCellElementSection"/> class.
+    /// Initializes a new instance of the <see cref="Section"/> class.
     /// </summary>
     /// <param name="caption">The caption.</param>
     public Section(string? caption = default)
@@ -124,6 +124,7 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// </summary>
     /// <param name="index">The starting index.</param>
     /// <param name="newElements">List of elements.</param>
+    /// <returns></returns>
     public int Insert(int index, params Element[] newElements)
     {
         return this.Insert(index, UITableViewRowAnimation.None, newElements);

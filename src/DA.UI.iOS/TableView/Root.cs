@@ -75,7 +75,6 @@ public class Root : UITableView
         this.RemoveAt(idx, UITableViewRowAnimation.Fade);
     }
 
-
     /// <summary>
     /// Removes a section at a specified location.
     /// </summary>

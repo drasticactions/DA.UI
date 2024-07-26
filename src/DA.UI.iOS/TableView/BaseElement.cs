@@ -96,7 +96,11 @@ public abstract class BaseElement<T> : Element, INotifyPropertyChanged
     /// </remarks>
     private bool SetField<Y>(ref Y field, Y value, [CallerMemberName] string? propertyName = null)
     {
-        if (EqualityComparer<Y>.Default.Equals(field, value)) return false;
+        if (EqualityComparer<Y>.Default.Equals(field, value))
+        {
+            return false;
+        }
+
         field = value;
         this.OnPropertyChanged(propertyName);
         return true;
