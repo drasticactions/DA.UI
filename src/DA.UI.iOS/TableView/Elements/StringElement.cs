@@ -1,10 +1,4 @@
-// <copyright file="StringElement.cs" company="Drastic Actions">
-// Copyright (c) Drastic Actions. All rights reserved.
-// </copyright>
-
-using DA.UI.TableView;
-
-namespace DA.UI.iOSApp;
+namespace DA.UI.TableView.Elements;
 
 public class StringElement : BaseElement<string>
 {

@@ -23,7 +23,9 @@ public abstract class Element : UITableViewCell
     /// <inheritdoc/>
     public Section? Parent { get; private set; }
 
-    public abstract void Layout();
+    public virtual void Layout()
+    {
+    }
 
     internal void SetParent(Section section)
     {

@@ -13,6 +13,11 @@ namespace DA.UI.Commands
     public interface IAsyncCommand : ICommand, IDisposable, INotifyPropertyChanged
     {
         /// <summary>
+        /// Is Busy Changed.
+        /// </summary>
+        public event EventHandler<bool>? IsBusyChanged;
+
+        /// <summary>
         /// Gets a value indicating whether the command is executing.
         /// </summary>
         public bool IsBusy { get; }

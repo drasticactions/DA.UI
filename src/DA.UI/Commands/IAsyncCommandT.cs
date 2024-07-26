@@ -16,6 +16,11 @@ namespace DA.UI.Commands
 #pragma warning restore SA1649 // File name should match first type name
     {
         /// <summary>
+        /// Is Busy Changed.
+        /// </summary>
+        public event EventHandler<bool>? IsBusyChanged;
+
+        /// <summary>
         /// Gets a value indicating whether the command is executing.
         /// </summary>
         public bool IsBusy { get; }

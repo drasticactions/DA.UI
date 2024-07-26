@@ -4,6 +4,10 @@
     <ProjectReference Include="..\DA.UI\DA.UI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Drastic.Masonry" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-tvos</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>

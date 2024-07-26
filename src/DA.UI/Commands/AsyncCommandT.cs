@@ -76,12 +76,21 @@ namespace DA.UI.Commands
         public event EventHandler? CanExecuteChanged;
 
         /// <summary>
+        /// Is Busy Changed.
+        /// </summary>
+        public event EventHandler<bool>? IsBusyChanged;
+
+        /// <summary>
         /// Gets a value indicating whether the command is executing.
         /// </summary>
         public bool IsBusy
         {
             get => this.isBusy;
-            private set => this.SetProperty(ref this.isBusy, value);
+            private set
+            {
+                this.SetProperty(ref this.isBusy, value, true);
+                this.IsBusyChanged?.Invoke(this, value);
+            }
         }
 
         /// <inheritdoc/>

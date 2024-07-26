@@ -56,22 +56,9 @@ public class RootDataSource : UITableViewDataSource
     /// <inheritdoc/>
     public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
     {
-        try
-        {
-            var section = this.Sections[(int)indexPath.Section];
-            var element = section.Elements?[(int)indexPath.Row];
-            if (element is Element cell)
-            {
-                cell.Layout();
-                return cell;
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-
-        throw new Exception("Could not get cell.");
+        var section = this.Sections[(int)indexPath.Section];
+        var element = section.Elements?[(int)indexPath.Row];
+        element!.Layout();
+        return element;
     }
 }
