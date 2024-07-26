@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.ComponentModel;
+using Bogus;
 using DA.UI.Buttons;
 using DA.UI.Commands;
 using DA.UI.Events;
@@ -19,6 +20,9 @@ public sealed class MainViewController : UITableViewController
     private readonly IErrorHandler errorHandler;
 
     private IAsyncCommand delayTaskCommand;
+
+    private Faker<string> fakerParagraphs = new Faker<string>()
+        .CustomInstantiator(f => f.Lorem.Paragraphs(3));
 
     private bool canExecuteDelayTaskCommand = true;
 
@@ -68,6 +72,11 @@ public sealed class MainViewController : UITableViewController
                     var loginViewController = new LoginViewController(this.dispatcher, this.errorHandler);
                     this.NavigationController!.PushViewController(loginViewController, true);
                 }),
+            },
+            new Section("Text")
+            {
+                new DetailStringElement("Caption", "Value"),
+                new DetailStringElement("Multi-line", this.fakerParagraphs.Generate()),
             },
         };
     }
