@@ -11,6 +11,9 @@ public class AsyncCommandElementButton : AsyncCommandButton
     public AsyncCommandElementButton(IAsyncCommand value)
         : base(value)
     {
+        #if MACCATALYST
+        this.PreferredBehavioralStyle = UIKit.UIBehavioralStyle.Pad;
+        #endif
     }
 
     protected override UIButtonConfiguration? SetButtonConfiguration(bool isRunning)
