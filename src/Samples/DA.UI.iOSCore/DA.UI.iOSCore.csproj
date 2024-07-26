@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DA.UI\DA.UI.csproj" />
+    <ProjectReference Include="..\..\DA.UI.iOS\DA.UI.iOS.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-tvos</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>DA.UI.iOSApp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" />
+    <PackageReference Include="Drastic.iCarousel" />
+    <PackageReference Include="Drastic.Masonry" />
+    <PackageReference Include="Drastic.SDWebImage" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+</Project>
