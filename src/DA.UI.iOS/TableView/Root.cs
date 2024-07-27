@@ -40,7 +40,7 @@ public class Root : UITableView
     /// After adding the section, it updates the table view to include the new section by inserting it
     /// with no animation.
     /// </remarks>
-    public void Add(Section section)
+    public void Add(Section section, UITableViewRowAnimation anim = UITableViewRowAnimation.None, bool reloadTable = true)
     {
         ArgumentNullException.ThrowIfNull(section);
         this.RootDataSource.Sections.Add(section);
@@ -49,7 +49,10 @@ public class Root : UITableView
             sectionCell.SetParent(this);
         }
 
-        this.InsertSections(this.MakeIndexSet(this.Sections.Count - 1, 1), UITableViewRowAnimation.None);
+        if (reloadTable)
+        {
+            this.InsertSections(NSIndexSet.FromIndex(this.Sections.Count - 1), anim);
+        }
     }
 
     /// <summary>
@@ -62,7 +65,7 @@ public class Root : UITableView
     /// it is removed using the <see cref="RemoveAt"/> method with a fade animation. If the section is not found,
     /// the method exits without making any changes.
     /// </remarks>
-    public void Remove(Section s)
+    public void Remove(Section s, UITableViewRowAnimation anim = UITableViewRowAnimation.None, bool reloadTable = true)
     {
         ArgumentNullException.ThrowIfNull(s);
 
@@ -72,15 +75,10 @@ public class Root : UITableView
             return;
         }
 
-        this.RemoveAt(idx, UITableViewRowAnimation.Fade);
-    }
-
-    /// <summary>
-    /// Removes a section at a specified location.
-    /// </summary>
-    public void RemoveAt(int idx)
-    {
-        this.RemoveAt(idx, UITableViewRowAnimation.Fade);
+        if (reloadTable)
+        {
+            this.RemoveAt(idx, anim, reloadTable);
+        }
     }
 
     /// <summary>
@@ -91,10 +89,13 @@ public class Root : UITableView
     /// After clearing, it calls ReloadData to refresh the table view, ensuring that the UI
     /// accurately reflects the current state of the Sections list, which is now empty.
     /// </remarks>
-    public void Clear()
+    public void Clear(bool reloadTable = true)
     {
         this.RootDataSource.Sections.Clear();
-        this.ReloadData();
+        if (reloadTable)
+        {
+            this.ReloadData();
+        }
     }
 
     /// <summary>
@@ -106,7 +107,7 @@ public class Root : UITableView
     /// <param name="anim">
     /// A <see cref="UITableViewRowAnimation"/>.
     /// </param>
-    public void RemoveAt(int idx, UITableViewRowAnimation anim)
+    public void RemoveAt(int idx, UITableViewRowAnimation anim = UITableViewRowAnimation.None, bool reloadTable = true)
     {
         if (idx < 0 || idx >= this.Sections.Count)
         {
@@ -115,7 +116,10 @@ public class Root : UITableView
 
         this.RootDataSource.Sections.RemoveAt(idx);
 
-        this.DeleteSections(NSIndexSet.FromIndex(idx), anim);
+        if (reloadTable)
+        {
+            this.DeleteSections(NSIndexSet.FromIndex(idx), anim);
+        }
     }
 
     /// <summary>

@@ -59,19 +59,19 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// <param name="element">
     /// An element to add to the section.
     /// </param>
-    public void Add(Element element) => this.Add(element, UITableViewRowAnimation.None);
+    public void Add(Element element, bool reloadTable = true) => this.Add(element, UITableViewRowAnimation.None, reloadTable);
 
     /// <summary>
     /// Adds a new child Element to the Section with the specified animation style.
     /// </summary>
     /// <param name="element">An element to add to the section.</param>
     /// <param name="style">The animation style to use.</param>
-    public void Add(Element element, UITableViewRowAnimation style)
+    public void Add(Element element, UITableViewRowAnimation style, bool reloadTable = true)
     {
         this.elements.Add(element);
         element.SetParent(this);
 
-        if (this.Root != null)
+        if (this.Root != null && reloadTable)
         {
             this.InsertVisual(this.Elements.Count - 1, style, 1);
         }
@@ -90,7 +90,7 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// A series of elements.
     /// </param>
     /// <returns>Inserted number.</returns>
-    public int Insert(int idx, UITableViewRowAnimation anim, params Element[] newElements)
+    public int Insert(int idx, UITableViewRowAnimation anim = UITableViewRowAnimation.None, bool reloadTable = true, params Element[] newElements)
     {
         ArgumentNullException.ThrowIfNull(newElements);
 
@@ -104,7 +104,7 @@ public class Section : IEnumerable<Element>, IEnumerable
             count++;
         }
 
-        if (this.Root is not null)
+        if (this.Root is not null && reloadTable)
         {
             if (anim == UITableViewRowAnimation.None)
             {
@@ -125,16 +125,16 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// <param name="index">The starting index.</param>
     /// <param name="newElements">List of elements.</param>
     /// <returns></returns>
-    public int Insert(int index, params Element[] newElements)
+    public int Insert(int index, bool reloadTable = true, params Element[] newElements)
     {
-        return this.Insert(index, UITableViewRowAnimation.None, newElements);
+        return this.Insert(index, UITableViewRowAnimation.None, reloadTable, newElements);
     }
 
     /// <summary>
     /// Removes an element at a specified index.
     /// </summary>
     /// <param name="e">The element to be removed.</param>
-    public void Remove(Element e)
+    public void Remove(Element e, bool reloadTable = true)
     {
         ArgumentNullException.ThrowIfNull(e);
 
@@ -143,7 +143,7 @@ public class Section : IEnumerable<Element>, IEnumerable
             i--;
             if (this.Elements[i] == e)
             {
-                this.RemoveRange(i, 1);
+                this.RemoveRange(i, 1, reloadTable);
                 return;
             }
         }
@@ -153,9 +153,9 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// Removes an element at a specified index.
     /// </summary>
     /// <param name="idx">The index of the element.</param>
-    public void Remove(int idx)
+    public void Remove(int idx, bool reloadTable = true)
     {
-        this.RemoveRange(idx, 1);
+        this.RemoveRange(idx, 1, reloadTable);
     }
 
     /// <summary>
@@ -167,9 +167,9 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// <param name="count">
     /// Number of elements to remove from the section.
     /// </param>
-    public void RemoveRange(int start, int count)
+    public void RemoveRange(int start, int count, bool reloadTable = true)
     {
-        this.RemoveRange(start, count, UITableViewRowAnimation.None);
+        this.RemoveRange(start, count, UITableViewRowAnimation.None, reloadTable);
     }
 
     /// <summary>
@@ -184,7 +184,7 @@ public class Section : IEnumerable<Element>, IEnumerable
     /// <param name="anim">
     /// The animation to use while removing the elements.
     /// </param>
-    public void RemoveRange(int start, int count, UITableViewRowAnimation anim)
+    public void RemoveRange(int start, int count, UITableViewRowAnimation anim, bool reloadTable = true)
     {
         if (start < 0 || start >= this.Elements.Count)
         {
@@ -217,16 +217,22 @@ public class Section : IEnumerable<Element>, IEnumerable
             paths[i] = NSIndexPath.FromRowSection(start + i, sidx);
         }
 
-        root.DeleteRows(paths, anim);
+        if (reloadTable)
+        {
+            root.DeleteRows(paths, anim);
+        }
     }
 
     /// <summary>
     /// Clears all the elements in the Section.
     /// </summary>
-    public void Clear()
+    public void Clear(bool reloadTable = true)
     {
         this.elements.Clear();
-        this.Root?.ReloadData();
+        if (this.Root != null && reloadTable)
+        {
+            this.Root.ReloadData();
+        }
     }
 
     private void InsertVisual(int idx, UITableViewRowAnimation anim, int count)

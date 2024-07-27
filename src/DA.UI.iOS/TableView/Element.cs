@@ -27,6 +27,8 @@ public abstract class Element : UITableViewCell
     {
     }
 
+    public virtual bool Matches(string text) => false;
+
     internal void SetParent(Section section)
     {
         this.Parent = section;

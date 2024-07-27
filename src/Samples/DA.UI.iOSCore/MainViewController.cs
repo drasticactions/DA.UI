@@ -72,6 +72,11 @@ public sealed class MainViewController : UITableViewController
                     var loginViewController = new LoginViewController(this.dispatcher, this.errorHandler);
                     this.NavigationController!.PushViewController(loginViewController, true);
                 }),
+                ActionElement.Create("Search View Controller", () =>
+                {
+                    var searchViewController = new SearchViewController();
+                    this.NavigationController!.PushViewController(searchViewController, true);
+                }),
             },
             new Section("Text")
             {

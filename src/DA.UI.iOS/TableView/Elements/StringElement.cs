@@ -19,4 +19,9 @@ public class StringElement : BaseElement<string>
         contentConfiguration.TextProperties.LineBreakMode = UILineBreakMode.WordWrap;
         this.ContentConfiguration = contentConfiguration;
     }
+
+    public override bool Matches(string text)
+    {
+        return this.Value.Contains(text, StringComparison.OrdinalIgnoreCase);
+    }
 }
