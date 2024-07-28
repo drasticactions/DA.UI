@@ -1,3 +1,4 @@
+#if !TVOS
 using Bogus;
 using DA.UI.TableView;
 using DA.UI.TableView.Elements;
@@ -45,3 +46,4 @@ public class SearchViewController : UITableViewController
         return 44;
     }
 }
+#endif
