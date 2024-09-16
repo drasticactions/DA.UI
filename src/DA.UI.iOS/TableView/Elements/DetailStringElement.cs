@@ -6,16 +6,28 @@ using DA.UI.TableView;
 
 namespace DA.UI;
 
+/// <summary>
+/// Represents an element that displays a caption and a detail string in a table view cell.
+/// Inherits from <see cref="BaseElement{T}"/> with a string type parameter.
+/// </summary>
 public class DetailStringElement : BaseElement<string>
 {
     private readonly string caption;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DetailStringElement"/> class with the specified caption and value.
+    /// </summary>
+    /// <param name="caption">The caption to display in the cell.</param>
+    /// <param name="value">The detail text to display in the cell.</param>
     public DetailStringElement(string caption, string value)
         : base(value, "DetailStringElement")
     {
         this.caption = caption;
     }
 
+    /// <summary>
+    /// Gets the caption to display in the cell.
+    /// </summary>
     public string Caption => this.caption;
 
     /// <summary>

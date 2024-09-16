@@ -4,16 +4,14 @@
 
 namespace DA.UI.TableView;
 
-public class RootSearchDelegate : UISearchBarDelegate
+/// <summary>
+/// Root Search Delegate.
+/// </summary>
+public class RootSearchDelegate(Root root) : UISearchBarDelegate
 {
-    private Root root;
+    private Root root = root;
     private Section[]? originalSections;
     private Element[][]? originalElements;
-
-    public RootSearchDelegate(Root root)
-    {
-        this.root = root;
-    }
 
     /// <inheritdoc/>
     public override void OnEditingStarted(UISearchBar searchBar)
@@ -23,7 +21,7 @@ public class RootSearchDelegate : UISearchBarDelegate
         searchBar.BecomeFirstResponder();
 #endif
         this.originalSections = this.root.Sections.ToArray();
-        this.originalElements = new Element [this.originalSections.Length][];
+        this.originalElements = new Element[this.originalSections.Length][];
         for (int i = 0; i < this.originalSections.Length; i++)
         {
             this.originalElements[i] = this.originalSections[i].Elements.ToArray();

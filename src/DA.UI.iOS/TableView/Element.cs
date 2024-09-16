@@ -20,15 +20,29 @@ public abstract class Element : UITableViewCell
     {
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the parent section of this element.
+    /// </summary>
     public Section? Parent { get; private set; }
 
+    /// <summary>
+    /// Layouts the cell.
+    /// </summary>
     public virtual void Layout()
     {
     }
 
+    /// <summary>
+    /// If the cell matches.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>Match.</returns>
     public virtual bool Matches(string text) => false;
 
+    /// <summary>
+    /// Sets the parent.
+    /// </summary>
+    /// <param name="section">The section.</param>
     internal void SetParent(Section section)
     {
         this.Parent = section;

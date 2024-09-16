@@ -23,11 +23,19 @@ public class Root : UITableView
         this.DataSource = (UITableViewDataSource)this.RootDataSource!;
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the parent element of this element.
+    /// </summary>
     public Element? Parent => null;
 
+    /// <summary>
+    /// Gets the root data source for the table view.
+    /// </summary>
     public RootDataSource RootDataSource { get; }
 
+    /// <summary>
+    /// Gets the sections in the table view.
+    /// </summary>
     public IReadOnlyList<Section> Sections => this.RootDataSource.Sections;
 
     /// <summary>
@@ -44,7 +52,7 @@ public class Root : UITableView
     {
         ArgumentNullException.ThrowIfNull(section);
         this.RootDataSource.Sections.Add(section);
-        if (section is Section sectionCell)
+        if (section is { } sectionCell)
         {
             sectionCell.SetParent(this);
         }
@@ -59,6 +67,8 @@ public class Root : UITableView
     /// Removes a specified section from the table view.
     /// </summary>
     /// <param name="s">The section to remove.</param>
+    /// <param name="anim">Animation.</param>
+    /// <param name="reloadTable">Reload the table.</param>
     /// <remarks>
     /// This method first checks if the provided section is null, throwing an <see cref="ArgumentNullException"/> if it is.
     /// It then attempts to find the index of the given section in the Sections list. If the section is found,
@@ -84,6 +94,7 @@ public class Root : UITableView
     /// <summary>
     /// Clears all sections from the table view and reloads the data.
     /// </summary>
+    /// <param name="reloadTable">Reload the table.</param>
     /// <remarks>
     /// This method removes all sections from the table view by clearing the Sections list.
     /// After clearing, it calls ReloadData to refresh the table view, ensuring that the UI
@@ -107,6 +118,7 @@ public class Root : UITableView
     /// <param name="anim">
     /// A <see cref="UITableViewRowAnimation"/>.
     /// </param>
+    /// <param name="reloadTable">Reload the table.</param>
     public void RemoveAt(int idx, UITableViewRowAnimation anim = UITableViewRowAnimation.None, bool reloadTable = true)
     {
         if (idx < 0 || idx >= this.Sections.Count)

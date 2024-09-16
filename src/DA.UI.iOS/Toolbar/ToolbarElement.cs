@@ -1,3 +1,7 @@
+// <copyright file="ToolbarElement.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
 #if MACCATALYST
 namespace DA.UI.Toolbar;
 

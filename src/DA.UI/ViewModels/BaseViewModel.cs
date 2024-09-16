@@ -123,7 +123,7 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     }
 
 #pragma warning disable SA1600 // Elements should be documented
-    protected bool SetProperty<T>(ref T backingStore, T value,  bool raiseCanExecuteChanged = false, [CallerMemberName] string propertyName = "", Action? onChanged = null)
+    protected bool SetProperty<T>(ref T backingStore, T value, bool raiseCanExecuteChanged = false, [CallerMemberName] string propertyName = "", Action? onChanged = null)
 #pragma warning restore SA1600 // Elements should be documented
     {
         if (EqualityComparer<T>.Default.Equals(backingStore, value))
