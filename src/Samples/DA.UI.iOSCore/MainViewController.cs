@@ -77,6 +77,11 @@ public sealed class MainViewController : UITableViewController
                     var pickerViewController = new DAPickerViewController();
                     this.NavigationController!.PushViewController(pickerViewController, true);
                 }),
+                ActionElement.Create("Grid View Controller", () =>
+                {
+                    var gridViewController = new GridViewController();
+                    this.NavigationController!.PushViewController(gridViewController, true);
+                }),
                #if !TVOS
                 ActionElement.Create("Search View Controller", () =>
                 {

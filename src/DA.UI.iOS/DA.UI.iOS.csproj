@@ -19,6 +19,7 @@
     <RootNamespace>DA.UI</RootNamespace>
     <IsPackable>true</IsPackable>
     <PackageId>DrasticActions.UI.iOS</PackageId>
+    <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
   
 </Project>
