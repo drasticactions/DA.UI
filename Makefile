@@ -1,5 +1,5 @@
 ARTIFACTS=artifacts/
-VERSION=0.0.1-preview
+VERSION=0.0.2-preview
 
 clean:
 	rm -rf $(ARTIFACTS)

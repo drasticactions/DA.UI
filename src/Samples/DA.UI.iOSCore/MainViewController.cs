@@ -72,6 +72,11 @@ public sealed class MainViewController : UITableViewController
                     var loginViewController = new LoginViewController(this.dispatcher, this.errorHandler);
                     this.NavigationController!.PushViewController(loginViewController, true);
                 }),
+                ActionElement.Create("DAPicker View Controller", () =>
+                {
+                    var pickerViewController = new DAPickerViewController();
+                    this.NavigationController!.PushViewController(pickerViewController, true);
+                }),
                #if !TVOS
                 ActionElement.Create("Search View Controller", () =>
                 {
