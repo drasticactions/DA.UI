@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Drastic.Masonry" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-tvos</TargetFrameworks>
+    <TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-tvos;net9.0-ios;net9.0-maccatalyst;net9.0-tvos</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>DA.UI</RootNamespace>

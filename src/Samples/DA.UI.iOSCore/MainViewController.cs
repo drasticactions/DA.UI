@@ -21,6 +21,8 @@ public sealed class MainViewController : UITableViewController
 
     private IAsyncCommand delayTaskCommand;
 
+    private IAsyncCommand resultTaskCommand;
+
     private Faker<string> fakerParagraphs = new Faker<string>()
         .CustomInstantiator(f => f.Lorem.Paragraphs(3));
 
@@ -47,6 +49,27 @@ public sealed class MainViewController : UITableViewController
             this.errorHandler,
             canExecute: () => this.canExecuteDelayTaskCommand);
 
+        this.resultTaskCommand = new AsyncCommand("Result", async (x, y, z) =>
+            {
+                var randomException = new Random().Next(0, 2) == 0;
+                var (stringResult, error) = this.GetRandomString(randomException);
+                if (error is not null)
+                {
+                    var modal = UIAlertController.Create("Error", error.Message, UIAlertControllerStyle.Alert);
+                    modal.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                    await this.PresentViewControllerAsync(modal, true);
+                }
+                else
+                {
+                    var modal = UIAlertController.Create("Result", stringResult, UIAlertControllerStyle.Alert);
+                    modal.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                    await this.PresentViewControllerAsync(modal, true);
+                }
+            },
+            this.dispatcher,
+            this.errorHandler,
+            canExecute: () => true);
+
         this.TableView = new Root()
         {
             new Section("Welcome")
@@ -64,6 +87,7 @@ public sealed class MainViewController : UITableViewController
                         this.delayTaskCommand.RaiseCanExecuteChanged();
                     }
                 }),
+                AsyncCommandElement.Create(this.resultTaskCommand),
             },
             new Section("View Controllers")
             {
@@ -96,5 +120,15 @@ public sealed class MainViewController : UITableViewController
                 new DetailStringElement("Multi-line", this.fakerParagraphs.Generate()),
             },
         };
+    }
+
+    private UIResult<string?> GetRandomString(bool throwException = false)
+    {
+        if (throwException)
+        {
+            return new Exception("An error occurred.");
+        }
+
+        return this.fakerParagraphs.Generate();
     }
 }
